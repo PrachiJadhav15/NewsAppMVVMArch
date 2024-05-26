@@ -11,7 +11,6 @@ import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
 import com.prachi.newsappmvvmarch.ui.base.UiState
 import com.prachi.newsappmvvmarch.utils.AppConstant.COUNTRY
 
-
 class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)

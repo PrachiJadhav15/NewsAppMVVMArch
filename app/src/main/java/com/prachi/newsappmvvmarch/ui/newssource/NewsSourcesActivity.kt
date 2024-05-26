@@ -10,7 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
-import com.prachi.newsappmvvmarch.data.model.Article
+import com.prachi.newsappmvvmarch.data.model.Source
 import com.prachi.newsappmvvmarch.databinding.NewsSourcesActivityBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
@@ -75,8 +75,8 @@ class NewsSourcesActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderList(articleList: List<Article>) {
-        adapter.addData(articleList)
+    private fun renderList(newsSourceList: List<Source>) {
+        adapter.addData(newsSourceList)
         adapter.notifyDataSetChanged()
     }
 

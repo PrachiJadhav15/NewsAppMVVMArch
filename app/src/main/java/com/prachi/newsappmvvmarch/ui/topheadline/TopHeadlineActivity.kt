@@ -10,15 +10,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
-
 import kotlinx.coroutines.launch
 import com.prachi.newsappmvvmarch.data.model.Article
 import com.prachi.newsappmvvmarch.databinding.ActivityTopHeadlineBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
-//import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
-
 import javax.inject.Inject
 
 class TopHeadlineActivity : AppCompatActivity() {
