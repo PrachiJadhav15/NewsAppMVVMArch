@@ -3,6 +3,7 @@ package com.prachi.newsappmvvmarch.di.component
 import android.content.Context
 import com.prachi.newsappmvvmarch.NewsApplication
 import com.prachi.newsappmvvmarch.data.api.NetworkService
+import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
 import com.prachi.newsappmvvmarch.di.ApplicationContext
 import com.prachi.newsappmvvmarch.di.module.ApplicationModule
@@ -21,4 +22,6 @@ interface ApplicationComponent
     fun getNetworkService(): NetworkService
 
     fun getTopHeadlineRepository(): TopHeadlineRepository
+
+    fun getNewsSourcesRepository(): NewsSourceRepository
 }

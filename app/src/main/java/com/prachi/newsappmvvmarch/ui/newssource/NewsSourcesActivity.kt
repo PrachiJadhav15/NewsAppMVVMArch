@@ -1,4 +1,4 @@
-package com.prachi.newsappmvvmarch.ui.topheadline
+package com.prachi.newsappmvvmarch.ui.newssource
 
 import android.os.Bundle
 import android.view.View
@@ -10,38 +10,35 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
-
-import kotlinx.coroutines.launch
 import com.prachi.newsappmvvmarch.data.model.Article
-import com.prachi.newsappmvvmarch.databinding.ActivityTopHeadlineBinding
+import com.prachi.newsappmvvmarch.databinding.NewsSourcesActivityBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
-//import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
-
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class TopHeadlineActivity : AppCompatActivity() {
+class NewsSourcesActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var newsListViewModel: TopHeadlineViewModel
+    lateinit var newsListViewModel: NewsSourcesViewModel
 
     @Inject
-    lateinit var adapter: TopHeadlineAdapter
+    lateinit var adapter: NewsSourcesAdapter
 
-    private lateinit var binding: ActivityTopHeadlineBinding
+    private lateinit var binding: NewsSourcesActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
-        binding = ActivityTopHeadlineBinding.inflate(layoutInflater)
+        binding = NewsSourcesActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupUI()
         setupObserver()
     }
 
     private fun setupUI() {
-        val recyclerView = binding.recyclerView
+        val recyclerView = binding.newsSourcesRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -60,16 +57,16 @@ class TopHeadlineActivity : AppCompatActivity() {
                         is UiState.Success -> {
                             binding.progressBar.visibility = View.GONE
                             renderList(it.data)
-                            binding.recyclerView.visibility = View.VISIBLE
+                            binding.newsSourcesRecyclerView.visibility = View.VISIBLE
                         }
                         is UiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
-                            binding.recyclerView.visibility = View.GONE
+                            binding.newsSourcesRecyclerView.visibility = View.GONE
                         }
                         is UiState.Error -> {
                             //Handle Error
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@TopHeadlineActivity, it.message, Toast.LENGTH_LONG)
+                            Toast.makeText(this@NewsSourcesActivity, it.message, Toast.LENGTH_LONG)
                                 .show()
                         }
                     }
