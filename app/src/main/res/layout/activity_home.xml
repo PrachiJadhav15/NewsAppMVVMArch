@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="50dp"
-    android:layout_marginEnd="50dp"
+    android:layout_marginStart="@dimen/fifty_dp"
+    android:layout_marginEnd="@dimen/fifty_dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Button
         android:id="@+id/topHeadlineBtn"
@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:onClick="startTopHeadlineActivity"
         android:text="@string/top_headline"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="@dimen/hundred_dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:onClick="startNewsSourceActivity"
         android:text="@string/news_source"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/topHeadlineBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:onClick="startCountiesActivity"
         android:text="@string/countries"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/newsSourceBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:onClick="startLanguageActivity"
         android:text="@string/language"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/countriesBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:onClick="startSearchActivity"
         android:text="@string/search"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/languagesBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
