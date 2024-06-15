@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-
 class NewsSourcesViewModel(private val newsSource: NewsSourceRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Source>>>(UiState.Loading)
@@ -22,12 +21,12 @@ class NewsSourcesViewModel(private val newsSource: NewsSourceRepository) : ViewM
     }
 
     private fun fetchNewsSources() {
-        viewModelScope.launch { newsSource.getNewsSources().
-        catch {e->
-            _uiState.value = UiState.Error(e.toString())
-        }.collect{
-            _uiState.value = UiState.Success(it)
-        }
+        viewModelScope.launch {
+            newsSource.getNewsSources().catch { e ->
+                _uiState.value = UiState.Error(e.toString())
+            }.collect {
+                _uiState.value = UiState.Success(it)
+            }
         }
     }
 }

@@ -2,7 +2,6 @@ package com.prachi.newsappmvvmarch.data.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class Article(
     @SerializedName("title")
     val title: String = "",

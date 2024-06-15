@@ -10,12 +10,18 @@ class NewsSourcesAdapter(
     private val sourceList: ArrayList<Source>
 ) : RecyclerView.Adapter<NewsSourcesAdapter.DataViewHolder>() {
 
-    class DataViewHolder(private val binding: NewsSourcesItemLayoutBinding) :
+    var onItemClick: ((Source) -> Unit)? = null
+
+    class DataViewHolder(
+        private val binding: NewsSourcesItemLayoutBinding,
+        private val onItemClick: ((Source) -> Unit)?
+    ) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(source: Source) {
             binding.textViewNewsTitle.text = source.name
             itemView.setOnClickListener {
-
+                onItemClick?.invoke(source)
             }
         }
     }
@@ -26,7 +32,7 @@ class NewsSourcesAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ), onItemClick
         )
 
     override fun getItemCount(): Int = sourceList.size
@@ -37,5 +43,4 @@ class NewsSourcesAdapter(
     fun addData(list: List<Source>) {
         sourceList.addAll(list)
     }
-
 }

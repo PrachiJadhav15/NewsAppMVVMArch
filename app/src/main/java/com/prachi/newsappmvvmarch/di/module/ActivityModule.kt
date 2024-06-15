@@ -3,10 +3,13 @@ package com.prachi.newsappmvvmarch.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.prachi.newsappmvvmarch.data.repository.NewsListBySourceRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
 import com.prachi.newsappmvvmarch.di.ActivityContext
 import com.prachi.newsappmvvmarch.ui.base.ViewModelProviderFactory
+import com.prachi.newsappmvvmarch.ui.newssource.NewsListAdapter
+import com.prachi.newsappmvvmarch.ui.newssource.NewsListViewModel
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesAdapter
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesViewModel
 import com.prachi.newsappmvvmarch.ui.topheadline.TopHeadlineAdapter
@@ -15,7 +18,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ActivityModule (private val activity: AppCompatActivity){
+class ActivityModule(private val activity: AppCompatActivity) {
 
     @ActivityContext
     @Provides
@@ -45,4 +48,14 @@ class ActivityModule (private val activity: AppCompatActivity){
     @Provides
     fun provideNewsSourcesAdapter() = NewsSourcesAdapter(ArrayList())
 
+    @Provides
+    fun provideNewsListBySourceViewModel(newsListBySourceRepository: NewsListBySourceRepository): NewsListViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(NewsListViewModel::class) {
+                NewsListViewModel(newsListBySourceRepository)
+            })[NewsListViewModel::class.java]
+    }
+
+    @Provides
+    fun provideNewsListAdapter() = NewsListAdapter(ArrayList())
 }

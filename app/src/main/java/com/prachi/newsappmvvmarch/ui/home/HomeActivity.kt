@@ -13,6 +13,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
     }
+
     fun startTopHeadlineActivity(view: View) {
         startActivity(Intent(this@HomeActivity, TopHeadlineActivity::class.java))
     }
@@ -20,12 +21,15 @@ class HomeActivity : AppCompatActivity() {
     fun startNewsSourceActivity(view: View) {
         startActivity(Intent(this@HomeActivity, NewsSourcesActivity::class.java))
     }
+
     fun startCountiesActivity(view: View) {
 
     }
+
     fun startLanguageActivity(view: View) {
 
     }
+
     fun startSearchActivity(view: View) {
 
     }

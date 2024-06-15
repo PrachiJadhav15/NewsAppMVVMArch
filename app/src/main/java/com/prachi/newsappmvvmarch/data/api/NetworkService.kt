@@ -1,5 +1,6 @@
 package com.prachi.newsappmvvmarch.data.api
 
+import com.prachi.newsappmvvmarch.data.model.NewsListBySource
 import com.prachi.newsappmvvmarch.data.model.NewsSourcesResponse
 import com.prachi.newsappmvvmarch.data.model.TopHeadlinesResponse
 import com.prachi.newsappmvvmarch.utils.AppConstant.NEWS_APP_API_KEY
@@ -19,4 +20,7 @@ interface NetworkService {
     @GET("top-headlines/sources")
     suspend fun getNewsSources(): NewsSourcesResponse
 
+    @Headers("X-Api-Key: $NEWS_APP_API_KEY")
+    @GET("top-headlines")
+    suspend fun getNewsListBySource(@Query("sources") source: String): NewsListBySource
 }

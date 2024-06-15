@@ -5,7 +5,7 @@ import com.prachi.newsappmvvmarch.di.component.ApplicationComponent
 import com.prachi.newsappmvvmarch.di.component.DaggerApplicationComponent
 import com.prachi.newsappmvvmarch.di.module.ApplicationModule
 
-class NewsApplication :Application() {
+class NewsApplication : Application() {
 
     lateinit var applicationComponent: ApplicationComponent
     override fun onCreate() {

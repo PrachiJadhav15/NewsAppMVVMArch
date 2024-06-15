@@ -1,5 +1,6 @@
 package com.prachi.newsappmvvmarch.ui.newssource
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,6 +18,8 @@ import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+const val SOURCE = "source"
 
 class NewsSourcesActivity : AppCompatActivity() {
 
@@ -46,6 +49,10 @@ class NewsSourcesActivity : AppCompatActivity() {
                 (recyclerView.layoutManager as LinearLayoutManager).orientation
             )
         )
+
+        adapter.onItemClick = {
+            adapterOnClick(it)
+        }
         recyclerView.adapter = adapter
     }
 
@@ -59,10 +66,12 @@ class NewsSourcesActivity : AppCompatActivity() {
                             renderList(it.data)
                             binding.newsSourcesRecyclerView.visibility = View.VISIBLE
                         }
+
                         is UiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.newsSourcesRecyclerView.visibility = View.GONE
                         }
+
                         is UiState.Error -> {
                             //Handle Error
                             binding.progressBar.visibility = View.GONE
@@ -86,4 +95,10 @@ class NewsSourcesActivity : AppCompatActivity() {
             .activityModule(ActivityModule(this)).build().inject(this)
     }
 
+    /* Opens NewsListActivity when RecyclerView item is clicked. */
+    private fun adapterOnClick(newsSource: Source) {
+        val intent = Intent(this, NewsListActivity()::class.java)
+        intent.putExtra(SOURCE, newsSource.name)
+        startActivity(intent)
+    }
 }

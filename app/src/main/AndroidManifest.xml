@@ -22,6 +22,9 @@
             android:name=".ui.newssource.NewsSourcesActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.newssource.NewsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
