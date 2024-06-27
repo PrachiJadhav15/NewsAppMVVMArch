@@ -15,11 +15,7 @@ class NewsListViewModel(private val newsListBySourceRepository: NewsListBySource
     private val _uiState = MutableStateFlow<UiState<List<ArticleBySource>>>(UiState.Loading)
     val uiState: MutableStateFlow<UiState<List<ArticleBySource>>> = _uiState
 
-    init {
-        fetchNewsListBySource("abc-news")
-    }
-    // TODO("pass this query parameter 'source' thr viewModel provider")
-    private fun fetchNewsListBySource(source: String) {
+     fun fetchNewsListBySource(source: String) {
         viewModelScope.launch {
             newsListBySourceRepository.getNewsListBySource(source).catch { e ->
                 _uiState.value = UiState.Error(e.toString())

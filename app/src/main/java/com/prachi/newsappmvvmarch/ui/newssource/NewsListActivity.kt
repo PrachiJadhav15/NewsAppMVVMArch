@@ -33,6 +33,9 @@ class NewsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlineBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val bundle = intent.extras
+        val sourceName = bundle?.getString(SOURCE)
+        sourceName?.let { newsListViewModel.fetchNewsListBySource(it) }
         setupUI()
         setupObserver()
     }

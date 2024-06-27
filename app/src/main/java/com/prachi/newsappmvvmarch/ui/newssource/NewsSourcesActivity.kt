@@ -98,7 +98,7 @@ class NewsSourcesActivity : AppCompatActivity() {
     /* Opens NewsListActivity when RecyclerView item is clicked. */
     private fun adapterOnClick(newsSource: Source) {
         val intent = Intent(this, NewsListActivity()::class.java)
-        intent.putExtra(SOURCE, newsSource.name)
+        intent.putExtra(SOURCE, newsSource.id)
         startActivity(intent)
     }
 }
