@@ -1,6 +1,6 @@
 package com.prachi.newsappmvvmarch.data.model
 
-data class ArticleBySource(
+data class NewsListArticle(
     val author: String,
     val content: String,
     val description: String,

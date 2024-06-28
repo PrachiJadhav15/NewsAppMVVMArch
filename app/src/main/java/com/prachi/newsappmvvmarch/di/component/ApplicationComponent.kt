@@ -3,7 +3,7 @@ package com.prachi.newsappmvvmarch.di.component
 import android.content.Context
 import com.prachi.newsappmvvmarch.NewsApplication
 import com.prachi.newsappmvvmarch.data.api.NetworkService
-import com.prachi.newsappmvvmarch.data.repository.NewsListBySourceRepository
+import com.prachi.newsappmvvmarch.data.repository.NewsListRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
 import com.prachi.newsappmvvmarch.di.ApplicationContext
@@ -25,5 +25,5 @@ interface ApplicationComponent {
 
     fun getNewsSourcesRepository(): NewsSourceRepository
 
-    fun getNewsListBySourcesRepository(): NewsListBySourceRepository
+    fun getNewsListRepository(): NewsListRepository
 }

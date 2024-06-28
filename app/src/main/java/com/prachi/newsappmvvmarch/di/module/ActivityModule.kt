@@ -3,13 +3,15 @@ package com.prachi.newsappmvvmarch.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.prachi.newsappmvvmarch.data.repository.NewsListBySourceRepository
+import com.prachi.newsappmvvmarch.data.repository.NewsListRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
 import com.prachi.newsappmvvmarch.di.ActivityContext
 import com.prachi.newsappmvvmarch.ui.base.ViewModelProviderFactory
-import com.prachi.newsappmvvmarch.ui.newssource.NewsListAdapter
-import com.prachi.newsappmvvmarch.ui.newssource.NewsListViewModel
+import com.prachi.newsappmvvmarch.ui.country.CountryListAdapter
+import com.prachi.newsappmvvmarch.ui.country.CountryListViewModel
+import com.prachi.newsappmvvmarch.ui.newslist.NewsListAdapter
+import com.prachi.newsappmvvmarch.ui.newslist.NewsListViewModel
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesAdapter
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesViewModel
 import com.prachi.newsappmvvmarch.ui.topheadline.TopHeadlineAdapter
@@ -49,13 +51,24 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideNewsSourcesAdapter() = NewsSourcesAdapter(ArrayList())
 
     @Provides
-    fun provideNewsListBySourceViewModel(newsListBySourceRepository: NewsListBySourceRepository): NewsListViewModel {
+    fun provideNewsListBySourceViewModel(newsListRepository: NewsListRepository): NewsListViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(NewsListViewModel::class) {
-                NewsListViewModel(newsListBySourceRepository)
+                NewsListViewModel(newsListRepository)
             })[NewsListViewModel::class.java]
     }
 
     @Provides
     fun provideNewsListAdapter() = NewsListAdapter(ArrayList())
+
+    @Provides
+    fun provideCountryListViewModel(): CountryListViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(CountryListViewModel::class) {
+                CountryListViewModel()
+            })[CountryListViewModel::class.java]
+    }
+
+    @Provides
+    fun provideCountryListAdapter() = CountryListAdapter(ArrayList())
 }

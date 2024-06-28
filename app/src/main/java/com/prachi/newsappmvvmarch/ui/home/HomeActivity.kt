@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.prachi.newsappmvvmarch.R
+import com.prachi.newsappmvvmarch.ui.country.CountryListActivity
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesActivity
 import com.prachi.newsappmvvmarch.ui.topheadline.TopHeadlineActivity
 
@@ -23,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun startCountiesActivity(view: View) {
-
+        startActivity(Intent(this@HomeActivity, CountryListActivity::class.java))
     }
 
     fun startLanguageActivity(view: View) {

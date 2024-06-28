@@ -1,34 +1,27 @@
-package com.prachi.newsappmvvmarch.ui.newssource
+package com.prachi.newsappmvvmarch.ui.country
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
-import com.prachi.newsappmvvmarch.data.model.Source
 import com.prachi.newsappmvvmarch.databinding.NewsSourcesActivityBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
-import com.prachi.newsappmvvmarch.ui.base.UiState
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListActivity
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-const val SOURCE = "source"
+const val COUNTRY = "country"
 
-class NewsSourcesActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var newsListViewModel: NewsSourcesViewModel
+class CountryListActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var adapter: NewsSourcesAdapter
+    lateinit var countryListViewModel: CountryListViewModel
+
+    @Inject
+    lateinit var adapter: CountryListAdapter
 
     private lateinit var binding: NewsSourcesActivityBinding
 
@@ -38,7 +31,6 @@ class NewsSourcesActivity : AppCompatActivity() {
         binding = NewsSourcesActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupUI()
-        setupObserver()
     }
 
     private fun setupUI() {
@@ -55,37 +47,12 @@ class NewsSourcesActivity : AppCompatActivity() {
             adapterOnClick(it)
         }
         recyclerView.adapter = adapter
+        binding.progressBar.visibility = View.GONE
+        renderList(countryListViewModel.countryMap.values.toList())
     }
 
-    private fun setupObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                newsListViewModel.uiState.collect {
-                    when (it) {
-                        is UiState.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            renderList(it.data)
-                            binding.newsSourcesRecyclerView.visibility = View.VISIBLE
-                        }
 
-                        is UiState.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                            binding.newsSourcesRecyclerView.visibility = View.GONE
-                        }
-
-                        is UiState.Error -> {
-                            //Handle Error
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@NewsSourcesActivity, it.message, Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun renderList(newsSourceList: List<Source>) {
+    private fun renderList(newsSourceList: List<String>) {
         adapter.addData(newsSourceList)
         adapter.notifyDataSetChanged()
     }
@@ -97,9 +64,10 @@ class NewsSourcesActivity : AppCompatActivity() {
     }
 
     /* Opens NewsListActivity when RecyclerView item is clicked. */
-    private fun adapterOnClick(newsSource: Source) {
+    private fun adapterOnClick(country: String) {
+        val countryKey = countryListViewModel.countryMap.filterValues { it == country }.keys.first()
         val intent = Intent(this, NewsListActivity()::class.java)
-        intent.putExtra(SOURCE, newsSource.id)
+        intent.putExtra(COUNTRY, countryKey)
         startActivity(intent)
     }
 }

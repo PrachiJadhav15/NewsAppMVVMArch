@@ -1,4 +1,4 @@
-package com.prachi.newsappmvvmarch.ui.newssource
+package com.prachi.newsappmvvmarch.ui.newslist
 
 import android.os.Bundle
 import android.view.View
@@ -10,11 +10,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
-import com.prachi.newsappmvvmarch.data.model.ArticleBySource
+import com.prachi.newsappmvvmarch.data.model.NewsListArticle
 import com.prachi.newsappmvvmarch.databinding.ActivityTopHeadlineBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
+import com.prachi.newsappmvvmarch.ui.country.COUNTRY
+import com.prachi.newsappmvvmarch.ui.newssource.SOURCE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,7 +37,16 @@ class NewsListActivity : AppCompatActivity() {
         setContentView(binding.root)
         val bundle = intent.extras
         val sourceName = bundle?.getString(SOURCE)
-        sourceName?.let { newsListViewModel.fetchNewsListBySource(it) }
+        val countryName = bundle?.getString(COUNTRY)
+        sourceName?.let {
+           // if (sourceName.contentEquals(SOURCE))
+                newsListViewModel.fetchNewsListBySource(it)
+           /* else if (sourceName.contentEquals(COUNTRY))
+                newsListViewModel.fetchNewsListByCountry(it)*/
+        }
+        countryName?.let {
+                newsListViewModel.fetchNewsListByCountry(it)
+        }
         setupUI()
         setupObserver()
     }
@@ -80,7 +91,7 @@ class NewsListActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderList(articleList: List<ArticleBySource>) {
+    private fun renderList(articleList: List<NewsListArticle>) {
         adapter.addData(articleList)
         adapter.notifyDataSetChanged()
     }

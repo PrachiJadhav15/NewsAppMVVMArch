@@ -22,8 +22,12 @@
             android:name=".ui.newssource.NewsSourcesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.newssource.NewsListActivity"
+            android:name=".ui.newslist.NewsListActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.country.CountryListActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true">

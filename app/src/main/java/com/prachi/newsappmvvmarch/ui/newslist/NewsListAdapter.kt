@@ -1,4 +1,4 @@
-package com.prachi.newsappmvvmarch.ui.newssource
+package com.prachi.newsappmvvmarch.ui.newslist
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.prachi.newsappmvvmarch.data.model.ArticleBySource
+import com.prachi.newsappmvvmarch.data.model.NewsListArticle
 import com.prachi.newsappmvvmarch.databinding.TopHeadlineItemLayoutBinding
 
 class NewsListAdapter(
-    private val articleList: ArrayList<ArticleBySource>
+    private val articleList: ArrayList<NewsListArticle>
 ) : RecyclerView.Adapter<NewsListAdapter.DataViewHolder>() {
 
     class DataViewHolder(private val binding: TopHeadlineItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: ArticleBySource) {
+        fun bind(article: NewsListArticle) {
             binding.textViewTitle.text = article.title
             binding.textViewDescription.text = article.description
             binding.textViewSource.text = article.source.name
@@ -44,7 +44,7 @@ class NewsListAdapter(
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) =
         holder.bind(articleList[position])
 
-    fun addData(list: List<ArticleBySource>) {
+    fun addData(list: List<NewsListArticle>) {
         articleList.addAll(list)
     }
 }
