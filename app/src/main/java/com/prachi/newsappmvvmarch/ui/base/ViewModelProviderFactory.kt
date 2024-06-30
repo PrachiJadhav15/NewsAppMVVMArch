@@ -17,5 +17,4 @@ class ViewModelProviderFactory<T : ViewModel>(
         if (modelClass.isAssignableFrom(kClass.java)) return creator() as T
         throw IllegalArgumentException("Unknown class name")
     }
-
 }

@@ -2,7 +2,6 @@ package com.prachi.newsappmvvmarch.data.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class Article(
     @SerializedName("title")
     val title: String = "",
@@ -13,5 +12,5 @@ data class Article(
     @SerializedName("urlToImage")
     val imageUrl: String = "",
     @SerializedName("source")
-    val source: Source
+    val source: TopHeadlineSource
 )

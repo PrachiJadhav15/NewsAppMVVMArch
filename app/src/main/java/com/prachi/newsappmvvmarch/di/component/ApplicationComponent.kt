@@ -3,6 +3,8 @@ package com.prachi.newsappmvvmarch.di.component
 import android.content.Context
 import com.prachi.newsappmvvmarch.NewsApplication
 import com.prachi.newsappmvvmarch.data.api.NetworkService
+import com.prachi.newsappmvvmarch.data.repository.NewsListRepository
+import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
 import com.prachi.newsappmvvmarch.di.ApplicationContext
 import com.prachi.newsappmvvmarch.di.module.ApplicationModule
@@ -11,8 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [ApplicationModule::class])
-interface ApplicationComponent
-{
+interface ApplicationComponent {
     fun inject(application: NewsApplication)
 
     @ApplicationContext
@@ -21,4 +22,8 @@ interface ApplicationComponent
     fun getNetworkService(): NetworkService
 
     fun getTopHeadlineRepository(): TopHeadlineRepository
+
+    fun getNewsSourcesRepository(): NewsSourceRepository
+
+    fun getNewsListRepository(): NewsListRepository
 }

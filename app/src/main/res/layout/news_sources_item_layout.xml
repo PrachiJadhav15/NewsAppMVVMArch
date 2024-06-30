@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/carView"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/fifty_dp"
+    cardView:cardCornerRadius="@dimen/eight_dp"
+    cardView:cardElevation="@dimen/eight_dp"
+    android:layout_margin="@dimen/eight_dp">
+
+    <TextView
+        android:id="@+id/textViewNewsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/five_dp"
+        android:gravity="center_vertical"
+        android:text="title"
+        android:layout_margin="@dimen/five_dp"
+        android:padding="@dimen/five_dp"
+        android:lines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/twentyfive_sp"
+        android:textStyle="normal"
+        tools:text="Title" />
+</androidx.cardview.widget.CardView>
+
+
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="?android:attr/selectableItemBackground"
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/cardview_light_background"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewNewsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:layout_marginStart="5dp"
+            android:text="title"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+

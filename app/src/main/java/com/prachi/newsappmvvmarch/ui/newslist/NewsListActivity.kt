@@ -1,4 +1,4 @@
-package com.prachi.newsappmvvmarch.ui.topheadline
+package com.prachi.newsappmvvmarch.ui.newslist
 
 import android.os.Bundle
 import android.view.View
@@ -10,21 +10,23 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
-import kotlinx.coroutines.launch
-import com.prachi.newsappmvvmarch.data.model.Article
+import com.prachi.newsappmvvmarch.data.model.NewsListArticle
 import com.prachi.newsappmvvmarch.databinding.ActivityTopHeadlineBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
+import com.prachi.newsappmvvmarch.ui.country.COUNTRY
+import com.prachi.newsappmvvmarch.ui.newssource.SOURCE
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class TopHeadlineActivity : AppCompatActivity() {
+class NewsListActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var newsListViewModel: TopHeadlineViewModel
+    lateinit var newsListViewModel: NewsListViewModel
 
     @Inject
-    lateinit var adapter: TopHeadlineAdapter
+    lateinit var adapter: NewsListAdapter
 
     private lateinit var binding: ActivityTopHeadlineBinding
 
@@ -33,6 +35,18 @@ class TopHeadlineActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlineBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val bundle = intent.extras
+        val sourceName = bundle?.getString(SOURCE)
+        val countryName = bundle?.getString(COUNTRY)
+        sourceName?.let {
+           // if (sourceName.contentEquals(SOURCE))
+                newsListViewModel.fetchNewsListBySource(it)
+           /* else if (sourceName.contentEquals(COUNTRY))
+                newsListViewModel.fetchNewsListByCountry(it)*/
+        }
+        countryName?.let {
+                newsListViewModel.fetchNewsListByCountry(it)
+        }
         setupUI()
         setupObserver()
     }
@@ -68,7 +82,7 @@ class TopHeadlineActivity : AppCompatActivity() {
                         is UiState.Error -> {
                             //Handle Error
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@TopHeadlineActivity, it.message, Toast.LENGTH_LONG)
+                            Toast.makeText(this@NewsListActivity, it.message, Toast.LENGTH_LONG)
                                 .show()
                         }
                     }
@@ -77,7 +91,7 @@ class TopHeadlineActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderList(articleList: List<Article>) {
+    private fun renderList(articleList: List<NewsListArticle>) {
         adapter.addData(articleList)
         adapter.notifyDataSetChanged()
     }
@@ -88,4 +102,3 @@ class TopHeadlineActivity : AppCompatActivity() {
             .activityModule(ActivityModule(this)).build().inject(this)
     }
 }
-

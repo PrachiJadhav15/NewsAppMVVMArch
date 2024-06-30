@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">News App MVVM Arch</string>
+    <string name="top_headline">Top Headlines</string>
+    <string name="news_source">News Sources</string>
+    <string name="countries">Countries</string>
+    <string name="language">Language</string>
+    <string name="search">Search</string>
 </resources>
