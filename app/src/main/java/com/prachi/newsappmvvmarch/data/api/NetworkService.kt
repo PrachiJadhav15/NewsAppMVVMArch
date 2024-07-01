@@ -1,6 +1,7 @@
 package com.prachi.newsappmvvmarch.data.api
 
 import com.prachi.newsappmvvmarch.data.model.NewsListByCountry
+import com.prachi.newsappmvvmarch.data.model.NewsListByLanguage
 import com.prachi.newsappmvvmarch.data.model.NewsListBySource
 import com.prachi.newsappmvvmarch.data.model.NewsSourcesResponse
 import com.prachi.newsappmvvmarch.data.model.TopHeadlinesResponse
@@ -28,4 +29,8 @@ interface NetworkService {
     @Headers("X-Api-Key: $NEWS_APP_API_KEY")
     @GET("top-headlines")
     suspend fun getNewsListByCountry(@Query("country") country: String): NewsListByCountry
+
+    @Headers("X-Api-Key: $NEWS_APP_API_KEY")
+    @GET("top-headlines")
+    suspend fun getNewsListByLanguage(@Query("language") language: String): NewsListByLanguage
 }

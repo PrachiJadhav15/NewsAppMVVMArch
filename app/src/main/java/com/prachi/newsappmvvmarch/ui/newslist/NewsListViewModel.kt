@@ -34,4 +34,14 @@ class NewsListViewModel(private val newsListByRepository: NewsListRepository) :
             }
         }
     }
+
+    fun fetchNewsListByLanguage(language: String) {
+        viewModelScope.launch {
+            newsListByRepository.getNewsListByLanguage(language).catch { e ->
+                _uiState.value = UiState.Error(e.toString())
+            }.collect {
+                _uiState.value = UiState.Success(it)
+            }
+        }
+    }
 }

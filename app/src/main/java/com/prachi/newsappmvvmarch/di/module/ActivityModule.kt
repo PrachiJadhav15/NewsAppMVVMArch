@@ -10,6 +10,8 @@ import com.prachi.newsappmvvmarch.di.ActivityContext
 import com.prachi.newsappmvvmarch.ui.base.ViewModelProviderFactory
 import com.prachi.newsappmvvmarch.ui.country.CountryListAdapter
 import com.prachi.newsappmvvmarch.ui.country.CountryListViewModel
+import com.prachi.newsappmvvmarch.ui.language.LanguageSelectionAdapter
+import com.prachi.newsappmvvmarch.ui.language.LanguageViewModel
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListAdapter
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListViewModel
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesAdapter
@@ -71,4 +73,15 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideCountryListAdapter() = CountryListAdapter(ArrayList())
+
+    @Provides
+    fun provideLanguageViewModel(): LanguageViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(LanguageViewModel::class) {
+                LanguageViewModel()
+            })[LanguageViewModel::class.java]
+    }
+
+    @Provides
+    fun provideLanguageSelectionAdapter() = LanguageSelectionAdapter(ArrayList())
 }

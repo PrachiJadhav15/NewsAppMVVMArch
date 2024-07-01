@@ -16,6 +16,7 @@ import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
 import com.prachi.newsappmvvmarch.ui.country.COUNTRY
+import com.prachi.newsappmvvmarch.ui.language.LANGUAGE
 import com.prachi.newsappmvvmarch.ui.newssource.SOURCE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,14 +39,15 @@ class NewsListActivity : AppCompatActivity() {
         val bundle = intent.extras
         val sourceName = bundle?.getString(SOURCE)
         val countryName = bundle?.getString(COUNTRY)
+        val languageSelection = bundle?.getString(LANGUAGE)
         sourceName?.let {
-           // if (sourceName.contentEquals(SOURCE))
                 newsListViewModel.fetchNewsListBySource(it)
-           /* else if (sourceName.contentEquals(COUNTRY))
-                newsListViewModel.fetchNewsListByCountry(it)*/
         }
         countryName?.let {
                 newsListViewModel.fetchNewsListByCountry(it)
+        }
+        languageSelection?.let {
+            newsListViewModel.fetchNewsListByLanguage(it)
         }
         setupUI()
         setupObserver()

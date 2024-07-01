@@ -3,6 +3,7 @@ package com.prachi.newsappmvvmarch.di.component
 import com.prachi.newsappmvvmarch.di.ActivityScope
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.country.CountryListActivity
+import com.prachi.newsappmvvmarch.ui.language.LanguageSelectionActivity
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListActivity
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesActivity
 import com.prachi.newsappmvvmarch.ui.topheadline.TopHeadlineActivity
@@ -16,4 +17,5 @@ interface ActivityComponent {
     fun inject(activity: NewsSourcesActivity)
     fun inject(activity: NewsListActivity)
     fun inject(activity: CountryListActivity)
+    fun inject(activity: LanguageSelectionActivity)
 }
