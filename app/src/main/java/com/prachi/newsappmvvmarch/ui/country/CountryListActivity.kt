@@ -3,17 +3,23 @@ package com.prachi.newsappmvvmarch.ui.country
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prachi.newsappmvvmarch.NewsApplication
+import com.prachi.newsappmvvmarch.data.model.Countries
 import com.prachi.newsappmvvmarch.databinding.NewsSourcesActivityBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
+import com.prachi.newsappmvvmarch.ui.base.UiState
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListActivity
+import com.prachi.newsappmvvmarch.utils.AppConstant.COUNTRY_CODE
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-const val COUNTRY = "country"
 
 class CountryListActivity : AppCompatActivity() {
 
@@ -31,6 +37,7 @@ class CountryListActivity : AppCompatActivity() {
         binding = NewsSourcesActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupUI()
+        setupObserver()
     }
 
     private fun setupUI() {
@@ -42,17 +49,40 @@ class CountryListActivity : AppCompatActivity() {
                 (recyclerView.layoutManager as LinearLayoutManager).orientation
             )
         )
-
         adapter.onItemClick = {
             adapterOnClick(it)
         }
         recyclerView.adapter = adapter
-        binding.progressBar.visibility = View.GONE
-        renderList(countryListViewModel.countryMap.values.toList())
     }
 
+    private fun setupObserver() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                countryListViewModel.uiState.collect {
+                    when (it) {
+                        is UiState.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            renderList(it.data)
+                            binding.newsSourcesRecyclerView.visibility = View.VISIBLE
+                        }
 
-    private fun renderList(newsSourceList: List<String>) {
+                        is UiState.Error -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(this@CountryListActivity, it.message, Toast.LENGTH_LONG)
+                                .show()
+                        }
+
+                        is UiState.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.newsSourcesRecyclerView.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun renderList(newsSourceList: List<Countries>) {
         adapter.addData(newsSourceList)
         adapter.notifyDataSetChanged()
     }
@@ -64,10 +94,9 @@ class CountryListActivity : AppCompatActivity() {
     }
 
     /* Opens NewsListActivity when RecyclerView item is clicked. */
-    private fun adapterOnClick(country: String) {
-        val countryKey = countryListViewModel.countryMap.filterValues { it == country }.keys.first()
+    private fun adapterOnClick(countryCode: String) {
         val intent = Intent(this, NewsListActivity()::class.java)
-        intent.putExtra(COUNTRY, countryKey)
+        intent.putExtra(COUNTRY_CODE, countryCode)
         startActivity(intent)
     }
 }

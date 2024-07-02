@@ -1,14 +1,33 @@
 package com.prachi.newsappmvvmarch.ui.language
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.prachi.newsappmvvmarch.data.model.Languages
+import com.prachi.newsappmvvmarch.data.repository.LanguagesRepository
+import com.prachi.newsappmvvmarch.ui.base.UiState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LanguageViewModel: ViewModel() {
+class LanguageViewModel @Inject constructor(private val languagesRepository: LanguagesRepository): ViewModel() {
 
-    val languageMap : Map<String,String> = mapOf<String,String>("en" to "English",
-        "hi" to "Hindi", "ar" to "Arabic", "bn" to "Bengali","zh" to "Chinese",
-        "fr" to "French","de" to "German", "el" to "Greek",
-        "co" to "Columbia", "dk" to "Denmark","eg" to "Egypt", "fr" to "France",
-        "ge" to "Georgia", "de" to  "Germany", "hk" to  "Hong Kong","in" to "India",
-        "ir" to "Iran",  "it" to  "Italy",  "jp" to "Japan", "ke" to "Kenya",
-        "kr" to "Korea", "kw" to "Kuwait", "my" to "Malaysia")
+    private val _uiState = MutableStateFlow<UiState<List<Languages>>>(UiState.Loading)
+
+    val uiState : StateFlow<UiState<List<Languages>>> = _uiState
+
+    init {
+        fetchLanguages()
+    }
+
+    private fun fetchLanguages() {
+        viewModelScope.launch {
+            try {
+             val languages = languagesRepository.getLanguage("languages.json")
+                _uiState.value = UiState.Success(languages)
+            }catch(e:Exception){
+                _uiState.value = UiState.Error("Failed to Fetch Languages")
+            }
+        }
+    }
 }

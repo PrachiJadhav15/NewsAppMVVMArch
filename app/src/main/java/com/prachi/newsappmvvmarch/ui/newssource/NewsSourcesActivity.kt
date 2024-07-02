@@ -17,10 +17,9 @@ import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListActivity
+import com.prachi.newsappmvvmarch.utils.AppConstant.SOURCE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-const val SOURCE = "source"
 
 class NewsSourcesActivity : AppCompatActivity() {
 

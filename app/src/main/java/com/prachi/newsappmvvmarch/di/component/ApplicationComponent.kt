@@ -3,6 +3,8 @@ package com.prachi.newsappmvvmarch.di.component
 import android.content.Context
 import com.prachi.newsappmvvmarch.NewsApplication
 import com.prachi.newsappmvvmarch.data.api.NetworkService
+import com.prachi.newsappmvvmarch.data.repository.CountriesRepository
+import com.prachi.newsappmvvmarch.data.repository.LanguagesRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsListRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
@@ -26,4 +28,8 @@ interface ApplicationComponent {
     fun getNewsSourcesRepository(): NewsSourceRepository
 
     fun getNewsListRepository(): NewsListRepository
+
+    fun getCountriesRepository(): CountriesRepository
+
+    fun getLanguageRepository() : LanguagesRepository
 }

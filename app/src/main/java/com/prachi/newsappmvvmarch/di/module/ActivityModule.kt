@@ -3,6 +3,8 @@ package com.prachi.newsappmvvmarch.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.prachi.newsappmvvmarch.data.repository.CountriesRepository
+import com.prachi.newsappmvvmarch.data.repository.LanguagesRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsListRepository
 import com.prachi.newsappmvvmarch.data.repository.NewsSourceRepository
 import com.prachi.newsappmvvmarch.data.repository.TopHeadlineRepository
@@ -64,10 +66,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideNewsListAdapter() = NewsListAdapter(ArrayList())
 
     @Provides
-    fun provideCountryListViewModel(): CountryListViewModel {
+    fun provideCountryListViewModel(countriesRepository: CountriesRepository): CountryListViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(CountryListViewModel::class) {
-                CountryListViewModel()
+                CountryListViewModel(countriesRepository)
             })[CountryListViewModel::class.java]
     }
 
@@ -75,10 +77,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideCountryListAdapter() = CountryListAdapter(ArrayList())
 
     @Provides
-    fun provideLanguageViewModel(): LanguageViewModel {
+    fun provideLanguageViewModel(languagesRepository: LanguagesRepository): LanguageViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(LanguageViewModel::class) {
-                LanguageViewModel()
+                LanguageViewModel(languagesRepository)
             })[LanguageViewModel::class.java]
     }
 

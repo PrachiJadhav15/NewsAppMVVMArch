@@ -8,4 +8,8 @@ object AppConstant {
     const val NEWS_APP_API_KEY = "17481863876e4a6390c11bf8347fc84e"
     const val COUNTRY = "IN"
 
+    const val LANGUAGE_CODE = "language"
+    const val COUNTRY_CODE = "country"
+    const val SOURCE = "source"
+
 }

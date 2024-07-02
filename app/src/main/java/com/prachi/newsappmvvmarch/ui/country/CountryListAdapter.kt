@@ -3,10 +3,11 @@ package com.prachi.newsappmvvmarch.ui.country
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.prachi.newsappmvvmarch.data.model.Countries
 import com.prachi.newsappmvvmarch.databinding.NewsSourcesItemLayoutBinding
 
 class CountryListAdapter(
-    private val sourceList: ArrayList<String>
+    private val sourceList: ArrayList<Countries>
 ) : RecyclerView.Adapter<CountryListAdapter.DataViewHolder>() {
 
     var onItemClick: ((String) -> Unit)? = null
@@ -17,10 +18,10 @@ class CountryListAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(source: String) {
-            binding.textViewNewsTitle.text = source
+        fun bind(country: Countries) {
+            binding.textViewNewsTitle.text = country.countryName
             itemView.setOnClickListener {
-                onItemClick?.invoke(source)
+                onItemClick?.invoke(country.countryCode)
             }
         }
     }
@@ -39,7 +40,7 @@ class CountryListAdapter(
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) =
         holder.bind(sourceList[position])
 
-    fun addData(list: List<String>) {
+    fun addData(list: List<Countries>) {
         sourceList.addAll(list)
     }
 }

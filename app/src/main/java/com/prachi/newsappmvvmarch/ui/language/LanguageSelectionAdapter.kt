@@ -3,10 +3,11 @@ package com.prachi.newsappmvvmarch.ui.language
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.prachi.newsappmvvmarch.data.model.Languages
 import com.prachi.newsappmvvmarch.databinding.NewsSourcesItemLayoutBinding
 
 class LanguageSelectionAdapter(
-    private val sourceList: ArrayList<String>
+    private val sourceList: ArrayList<Languages>
 ) : RecyclerView.Adapter<LanguageSelectionAdapter.DataViewHolder>() {
 
     var onItemClick: ((String) -> Unit)? = null
@@ -17,10 +18,10 @@ class LanguageSelectionAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(source: String) {
-            binding.textViewNewsTitle.text = source
+        fun bind(source: Languages) {
+            binding.textViewNewsTitle.text = source.languageName
             itemView.setOnClickListener {
-                onItemClick?.invoke(source)
+                onItemClick?.invoke(source.languageCode)
             }
         }
     }
@@ -39,7 +40,7 @@ class LanguageSelectionAdapter(
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) =
         holder.bind(sourceList[position])
 
-    fun addData(list: List<String>) {
+    fun addData(list: List<Languages>) {
         sourceList.addAll(list)
     }
 }

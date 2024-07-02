@@ -15,9 +15,9 @@ import com.prachi.newsappmvvmarch.databinding.ActivityTopHeadlineBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
-import com.prachi.newsappmvvmarch.ui.country.COUNTRY
-import com.prachi.newsappmvvmarch.ui.language.LANGUAGE
-import com.prachi.newsappmvvmarch.ui.newssource.SOURCE
+import com.prachi.newsappmvvmarch.utils.AppConstant.COUNTRY_CODE
+import com.prachi.newsappmvvmarch.utils.AppConstant.LANGUAGE_CODE
+import com.prachi.newsappmvvmarch.utils.AppConstant.SOURCE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,13 +38,13 @@ class NewsListActivity : AppCompatActivity() {
         setContentView(binding.root)
         val bundle = intent.extras
         val sourceName = bundle?.getString(SOURCE)
-        val countryName = bundle?.getString(COUNTRY)
-        val languageSelection = bundle?.getString(LANGUAGE)
+        val countryCode = bundle?.getString(COUNTRY_CODE)
+        val languageSelection = bundle?.getString(LANGUAGE_CODE)
         sourceName?.let {
-                newsListViewModel.fetchNewsListBySource(it)
+            newsListViewModel.fetchNewsListBySource(it)
         }
-        countryName?.let {
-                newsListViewModel.fetchNewsListByCountry(it)
+        countryCode?.let {
+            newsListViewModel.fetchNewsListByCountry(it)
         }
         languageSelection?.let {
             newsListViewModel.fetchNewsListByLanguage(it)
