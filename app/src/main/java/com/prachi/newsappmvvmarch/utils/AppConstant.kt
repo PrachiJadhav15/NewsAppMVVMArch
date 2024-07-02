@@ -12,4 +12,7 @@ object AppConstant {
     const val COUNTRY_CODE = "country"
     const val SOURCE = "source"
 
+    const val DEBOUNCE_TIMEOUT = 300L
+    const val MIN_SEARCH_CHAR = 3
+
 }

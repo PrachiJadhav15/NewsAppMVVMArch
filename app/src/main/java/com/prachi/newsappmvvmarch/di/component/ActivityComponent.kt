@@ -6,6 +6,7 @@ import com.prachi.newsappmvvmarch.ui.country.CountryListActivity
 import com.prachi.newsappmvvmarch.ui.language.LanguageSelectionActivity
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListActivity
 import com.prachi.newsappmvvmarch.ui.newssource.NewsSourcesActivity
+import com.prachi.newsappmvvmarch.ui.search.SearchActivity
 import com.prachi.newsappmvvmarch.ui.topheadline.TopHeadlineActivity
 import dagger.Component
 
@@ -18,4 +19,5 @@ interface ActivityComponent {
     fun inject(activity: NewsListActivity)
     fun inject(activity: CountryListActivity)
     fun inject(activity: LanguageSelectionActivity)
+    fun inject(activity: SearchActivity)
 }
