@@ -33,7 +33,9 @@
         <activity
             android:name=".ui.search.SearchActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".ui.error.ErrorActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true">

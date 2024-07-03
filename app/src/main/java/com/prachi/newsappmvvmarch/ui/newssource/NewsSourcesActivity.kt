@@ -1,9 +1,10 @@
 package com.prachi.newsappmvvmarch.ui.newssource
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,10 +17,12 @@ import com.prachi.newsappmvvmarch.databinding.NewsSourcesActivityBinding
 import com.prachi.newsappmvvmarch.di.component.DaggerActivityComponent
 import com.prachi.newsappmvvmarch.di.module.ActivityModule
 import com.prachi.newsappmvvmarch.ui.base.UiState
+import com.prachi.newsappmvvmarch.ui.error.ErrorActivity
 import com.prachi.newsappmvvmarch.ui.newslist.NewsListActivity
 import com.prachi.newsappmvvmarch.utils.AppConstant.SOURCE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class NewsSourcesActivity : AppCompatActivity() {
 
@@ -30,6 +33,13 @@ class NewsSourcesActivity : AppCompatActivity() {
     lateinit var adapter: NewsSourcesAdapter
 
     private lateinit var binding: NewsSourcesActivityBinding
+
+    private var resultLauncher =
+    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            newsListViewModel.fetchNewsSources()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
@@ -73,10 +83,8 @@ class NewsSourcesActivity : AppCompatActivity() {
                         }
 
                         is UiState.Error -> {
-                            //Handle Error
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@NewsSourcesActivity, it.message, Toast.LENGTH_LONG)
-                                .show()
+                            startErrorScreen()
                         }
                     }
                 }
@@ -100,5 +108,10 @@ class NewsSourcesActivity : AppCompatActivity() {
         val intent = Intent(this, NewsListActivity()::class.java)
         intent.putExtra(SOURCE, newsSource.id)
         startActivity(intent)
+    }
+
+    private fun startErrorScreen() {
+        val intent = Intent(this@NewsSourcesActivity, ErrorActivity::class.java)
+        resultLauncher.launch(intent)
     }
 }

@@ -5,4 +5,7 @@
     <string name="countries">Countries</string>
     <string name="language">Language</string>
     <string name="search">Search</string>
+    <string name="oops">Ooops,</string>
+    <string name="error_message">Something went wrong, Let\'s try one more time!</string>
+    <string name="try_again">Try Again</string>
 </resources>
